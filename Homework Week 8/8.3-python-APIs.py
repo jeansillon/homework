@@ -15,6 +15,17 @@ api_key = os.getenv('API_KEY')
 print(api_key)
 
 # Get weather for multiple cities
-data_pull_request = requests.get('http://api.openweathermap.org/data/2.5/weather?q=charlotte&appid='+ api_key)
-print(data_pull_request.text)
+weather = requests.get('http://api.openweathermap.org/data/2.5/weather?q=charlotte&appid='+ api_key)
+print(weather.text)
 
+# Convert the JSON data to a DataFrame
+df = pd.DataFrame(weather)
+
+# Print the DataFrame
+print(df)
+
+
+# Export the DataFrame to a CSV file
+df.to_csv('weather.csv', index=False)
+
+print("Data exported successfully!")
